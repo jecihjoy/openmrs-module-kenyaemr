@@ -17,6 +17,8 @@ import org.openmrs.module.kenyaemr.EmrConstants;
 import org.openmrs.module.kenyaemr.api.KenyaEmrService;
 import org.openmrs.module.kenyaui.annotation.AppAction;
 import org.openmrs.module.kenyaui.annotation.SharedAction;
+import org.openmrs.module.queue.api.VisitQueueEntryService;
+import org.openmrs.module.queue.model.VisitQueueEntry;
 import org.openmrs.ui.framework.SimpleObject;
 import org.openmrs.ui.framework.UiUtils;
 import org.openmrs.ui.framework.annotation.BindParams;
@@ -26,6 +28,7 @@ import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -79,6 +82,7 @@ public class RegistrationUtilFragmentController {
 					v.setStopDatetime(toStop);
 					vs.saveVisit(v);
 					numClosed += 1;
+					this.dequeueCheckedOutPatients(v.getPatient().getUuid(), toStop);
 				} catch (Exception ex) {
 					numFailed += 1;
 				}
@@ -127,7 +131,24 @@ public class RegistrationUtilFragmentController {
 		ui.validate(visit, new StopVisitValidator(), null);
 
 		Context.getVisitService().saveVisit(visit);
+		this.dequeueCheckedOutPatients(visit.getPatient().getUuid(), stopDatetime);
+
 		return ui.simplifyObject(visit);
+	}
+
+	public void dequeueCheckedOutPatients(String patientUuid, Date stopDatetime) {
+		VisitQueueEntryService service = Context.getService(VisitQueueEntryService.class);
+		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+
+		Collection<VisitQueueEntry> patientQueues = service.findVisitQueueEntries(null, null, null, patientUuid);
+		System.out.println("------------------------------------"+patientQueues.size());
+		for (VisitQueueEntry queueEntry: patientQueues) {
+			if (queueEntry.getQueueEntry().getEndedAt() == null) {
+				queueEntry.getQueueEntry().setEndedAt(stopDatetime);
+				service.createVisitQueueEntry(queueEntry);
+			}
+		}
+
 	}
 
 	/**

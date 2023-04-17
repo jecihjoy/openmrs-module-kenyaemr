@@ -74,6 +74,7 @@
         <reportingcompatibilityVersion>2.0.7</reportingcompatibilityVersion>
         <legacyUiVersion>1.5.0</legacyUiVersion>
         <bahmniAppointmentsVersion>1.5.0-SNAPSHOT</bahmniAppointmentsVersion>
+        <queueModuleVersion>1.0.0-SNAPSHOT</queueModuleVersion>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ssZ</maven.build.timestamp.format>
@@ -243,11 +244,16 @@
             <scope>provided</scope>
         </dependency>
          <dependency>
-
             <groupId>org.openmrs.module</groupId>
             <artifactId>webservices.rest-omod</artifactId>
             <version>${webservicesRestVersion}</version>
             <type>jar</type>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.openmrs.module</groupId>
+            <artifactId>queue-api</artifactId>
+            <version>${queueModuleVersion}</version>
             <scope>provided</scope>
         </dependency>
 
