@@ -304,7 +304,7 @@ public class EmrUtils {
 		return subCountyList;
 	}
 
-	public static int getFacilityByLoggedInUser() {
+	public static List<Integer> getFacilityByLoggedInUser() {
 		int facility = 0;
 		Person user = Context.getAuthenticatedUser().getPerson();
 
@@ -319,7 +319,7 @@ public class EmrUtils {
 				}
 			}
 		}
-		return facility;
+		return Arrays.asList(facility);
 	}
 
 }

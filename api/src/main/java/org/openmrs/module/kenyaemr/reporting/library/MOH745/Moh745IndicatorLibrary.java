@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.openmrs.module.kenyacore.report.ReportUtils;
 
+import java.util.List;
+
 @Component
 public class Moh745IndicatorLibrary {
 
@@ -24,44 +26,44 @@ public class Moh745IndicatorLibrary {
     private Moh745CohortLibrary Moh745CohortLibrary;
 
     /*Received Screening*/
-    public CohortIndicator receivedScreening(String[] indicatorVal, String visitType) {
+    public CohortIndicator receivedScreening(String[] indicatorVal, String visitType, List<Integer> facility) {
 
-        return cohortIndicator("Received Screening", ReportUtils.map(Moh745CohortLibrary.receivedScreeningCl(indicatorVal , visitType), "startDate=${startDate},endDate=${endDate}")
+        return cohortIndicator("Received Screening", ReportUtils.map(Moh745CohortLibrary.receivedScreeningCl(indicatorVal , visitType, facility), "startDate=${startDate},endDate=${endDate}")
         );
     }
 
     /*Received Positive Screening Result*/
-    public CohortIndicator receivedPositiveScreening(String[] indicatorVal, String visitType) {
+    public CohortIndicator receivedPositiveScreening(String[] indicatorVal, String visitType, List<Integer> facilities) {
 
-        return cohortIndicator("Received Positive Screening", ReportUtils.map(Moh745CohortLibrary.receivedPositiveScreeningCl(indicatorVal, visitType), "startDate=${startDate},endDate=${endDate}")
+        return cohortIndicator("Received Positive Screening", ReportUtils.map(Moh745CohortLibrary.receivedPositiveScreeningCl(indicatorVal, visitType, facilities), "startDate=${startDate},endDate=${endDate}")
         );
     }
 
     /*Suspicious Screening Result*/
-    public CohortIndicator receivedSuspiciousScreening(String result, String visitType) {
+    public CohortIndicator receivedSuspiciousScreening(String result, String visitType, List<Integer> facilities) {
 
-        return cohortIndicator("Received Suspicious Screening", ReportUtils.map(Moh745CohortLibrary.suspiciousScreeningCl( result, visitType), "startDate=${startDate},endDate=${endDate}")
+        return cohortIndicator("Received Suspicious Screening", ReportUtils.map(Moh745CohortLibrary.suspiciousScreeningCl( result, visitType, facilities), "startDate=${startDate},endDate=${endDate}")
         );
     }
 
     /*Treatment Method */
-    public CohortIndicator treatedMethod(String[] treatmentMethod, String visitType) {
+    public CohortIndicator treatedMethod(String[] treatmentMethod, String visitType, List<Integer> facilities) {
 
-        return cohortIndicator("Treatment Method", ReportUtils.map(Moh745CohortLibrary.treatmentMethodCl(treatmentMethod, visitType), "startDate=${startDate},endDate=${endDate}")
+        return cohortIndicator("Treatment Method", ReportUtils.map(Moh745CohortLibrary.treatmentMethodCl(treatmentMethod, visitType, facilities), "startDate=${startDate},endDate=${endDate}")
         );
     }
 
     /*HIV Positive Clients Screened*/
-    public CohortIndicator HIVPositiveClientsScreened(String visitType) {
+    public CohortIndicator HIVPositiveClientsScreened(String visitType, List<Integer> facilities) {
 
-        return cohortIndicator("HIV Positive Clients Screened",map(Moh745CohortLibrary.HIVPositiveClientsScreenedCl(visitType), "startDate=${startDate},endDate=${endDate}")
+        return cohortIndicator("HIV Positive Clients Screened",map(Moh745CohortLibrary.HIVPositiveClientsScreenedCl(visitType, facilities), "startDate=${startDate},endDate=${endDate}")
         );
     }
 
     /*HIV Positive With Positive Screening Results*/
-    public CohortIndicator HIVPositiveClientsScreenedWithPositiveResults(String visitType) {
+    public CohortIndicator HIVPositiveClientsScreenedWithPositiveResults(String visitType, List<Integer> facilities) {
 
-        return cohortIndicator("HIV Positive With Positive Screening Results",map(Moh745CohortLibrary.HIVPositiveClientsScreenedWithPositiveResultsCl(visitType), "startDate=${startDate},endDate=${endDate}")
+        return cohortIndicator("HIV Positive With Positive Screening Results",map(Moh745CohortLibrary.HIVPositiveClientsScreenedWithPositiveResultsCl(visitType, facilities), "startDate=${startDate},endDate=${endDate}")
         );
     }
 

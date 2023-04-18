@@ -7,7 +7,7 @@
  * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
  * graphic logo is a trademark of OpenMRS Inc.
  */
-package org.openmrs.module.kenyaemr.page.controller.shortcuts;
+package org.openmrs.module.kenyaemr.page.controller.directory.shortcuts;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -28,8 +28,8 @@ import org.openmrs.ui.framework.annotation.SpringBean;
 import org.openmrs.ui.framework.page.PageModel;
 import org.openmrs.util.OpenmrsUtil;
 
-@AppPage(EmrConstants.APP_O3_APPOINTMENTS_SHORTCUT)
-public class O3AppointmentsPageController {
+@AppPage(EmrConstants.APP_O3_QUEUES_SHORTCUT)
+public class O3ServiceQueuesPageController {
 
     public void controller() {
     }

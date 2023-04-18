@@ -7,14 +7,14 @@
  * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
  * graphic logo is a trademark of OpenMRS Inc.
  */
-package org.openmrs.module.kenyaemr.reporting.builder.common;
+package org.openmrs.module.kenyaemr.reporting.common;
 
 import org.openmrs.PatientIdentifierType;
 import org.openmrs.module.kenyacore.report.CohortReportDescriptor;
 import org.openmrs.module.kenyacore.report.builder.Builds;
 import org.openmrs.module.kenyacore.report.builder.CalculationReportBuilder;
 import org.openmrs.module.kenyacore.report.data.patient.definition.CalculationDataDefinition;
-import org.openmrs.module.kenyaemr.calculation.library.hiv.art.TransferInDateCalculation;
+import org.openmrs.module.kenyaemr.calculation.library.hiv.art.TransferOutDateCalculation;
 import org.openmrs.module.kenyaemr.metadata.HivMetadata;
 import org.openmrs.module.kenyaemr.reporting.data.converter.CalculationResultConverter;
 import org.openmrs.module.kenyaemr.reporting.data.converter.IdentifierConverter;
@@ -27,11 +27,11 @@ import org.springframework.stereotype.Component;
 
 /**
  * Created by codehub on 10/30/15.
- * Returns a report of clients who have ever been transferred in
+ * Returns clients who ever beeen transferred out from this facility
  */
 @Component
-@Builds({"kenyaemr.common.report.clients.transferred.in.original"})
-public class TransferInClientsReportBuilder extends CalculationReportBuilder {
+@Builds({"kenyaemr.common.report.clients.transferred.out.original"})
+public class TransferredOutClientsReportBuilder extends CalculationReportBuilder {
     @Override
     protected void addColumns(CohortReportDescriptor report, PatientDataSetDefinition dsd) {
         PatientIdentifierType upn = MetadataUtils.existing(PatientIdentifierType.class, HivMetadata._PatientIdentifierType.UNIQUE_PATIENT_NUMBER);
@@ -39,6 +39,6 @@ public class TransferInClientsReportBuilder extends CalculationReportBuilder {
 
         addStandardColumns(report, dsd);
         dsd.addColumn("UPN", identifierDef, "");
-        dsd.addColumn("Transfer in date", new CalculationDataDefinition("Transfer in date", new TransferInDateCalculation()), "", new CalculationResultConverter());
+        dsd.addColumn("Transfer out date", new CalculationDataDefinition("Transfer out date", new TransferOutDateCalculation()), "", new CalculationResultConverter());
     }
 }

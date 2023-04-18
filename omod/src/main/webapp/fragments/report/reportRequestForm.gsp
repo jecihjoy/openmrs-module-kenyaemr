@@ -85,7 +85,7 @@
 	<form id="${ config.id }">
 		<div class="ke-field-label">Report</div>
 		<div class="ke-field-content">${ config.definition.name }</div>
-		<% if (useMonthBasedPeriodField) { %>
+		<% if (false) { %>
 		<div class="ke-field-label">Month</div>
 		<div class="ke-field-content">
 
@@ -93,14 +93,14 @@
 		</div>
 		<% } %>
 		
-		<% if (useYearBasedPeriodField) { %>
+		<% if (false) { %>
 		<div class="ke-field-label">Year</div>
 		<div class="ke-field-content">
 
 			${ ui.includeFragment("kenyaemr", "field/reportPeriod", [ pastMonths: 0, pastYears: 6 ]) }
 		</div>
 		<% } %>
-		<% if (useDateBasedPeriodField) { %>
+		<% if (true) { %>
 		<div class="ke-field-label">Date Range</div>
 		<div class="ke-field-content">
 

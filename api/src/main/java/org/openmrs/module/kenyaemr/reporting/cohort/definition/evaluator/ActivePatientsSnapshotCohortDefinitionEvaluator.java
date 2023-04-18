@@ -51,7 +51,7 @@ public class ActivePatientsSnapshotCohortDefinitionEvaluator implements CohortDe
 
 		Cohort newCohort = new Cohort();
 
-		int facility = EmrUtils.getFacilityByLoggedInUser();
+		int facility = EmrUtils.getFacilityByLoggedInUser().get(0);
 
 		String qry="select t.patient_id\n" +
 				"from(\n" +
@@ -72,7 +72,7 @@ public class ActivePatientsSnapshotCohortDefinitionEvaluator implements CohortDe
 				"              where date(visit_date) <= date(:endDate) and program_name='HIV'\n" +
 				"              group by patient_id\n" +
 				"             ) d on d.patient_id = fup.patient_id\n" +
-				"    where fup.visit_date <= date(:endDate) and fup.location_id = " + facility + "\n" +
+				"    where fup.visit_date <= date(:endDate) and fup.location_id = :facilityID \n" +
 				"    group by patient_id\n" +
 				"    having (started_on_drugs is not null and started_on_drugs <> '') and (\n" +
 				"        (\n" +
@@ -88,6 +88,8 @@ public class ActivePatientsSnapshotCohortDefinitionEvaluator implements CohortDe
 		Date endDate = (Date)context.getParameterValue("endDate");
 		builder.addParameter("startDate", startDate);
 		builder.addParameter("endDate", endDate);
+		builder.addParameter("facilityID", facility);
+
 
 		List<Integer> ptIds = evaluationService.evaluateToList(builder, Integer.class, context);
 		newCohort.setMemberIds(new HashSet<Integer>(ptIds));
