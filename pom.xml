@@ -14,7 +14,7 @@
 
     <groupId>org.openmrs.module</groupId>
     <artifactId>kenyaemr</artifactId>
-    <version>18.7.2-SNAPSHOT</version>
+    <version>18.7.3-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>KenyaEMR</name>
     <description>OpenMRS-based EMR for Kenya</description>
@@ -73,7 +73,7 @@
         <webservicesRestVersion>2.26.0</webservicesRestVersion>
         <reportingcompatibilityVersion>2.0.9</reportingcompatibilityVersion>
         <legacyUiVersion>1.15.0</legacyUiVersion>
-        <bahmniAppointmentsVersion>1.6.1</bahmniAppointmentsVersion>
+        <bahmniAppointmentsVersion>2.0.0-SNAPSHOT</bahmniAppointmentsVersion>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ssZ</maven.build.timestamp.format>
@@ -237,7 +237,7 @@
         </dependency>
 
         <dependency>
-            <groupId>org.kenyahmis.module</groupId>
+            <groupId>org.bahmni.module</groupId>
             <artifactId>appointments-api</artifactId>
             <version>${bahmniAppointmentsVersion}</version>
             <scope>provided</scope>
