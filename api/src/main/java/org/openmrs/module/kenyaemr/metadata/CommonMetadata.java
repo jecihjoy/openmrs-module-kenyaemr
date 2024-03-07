@@ -161,7 +161,6 @@ public class CommonMetadata extends AbstractMetadataBundle {
 		public static final String  PAYMENT_METHOD_UUID = "e6cb0c3b-04b0-4117-9bc6-ce24adbda802";
 		public static final String POLICY_NUMBER = "0f4f3306-f01b-43c6-af5b-fdb60015cb02";
 		public static final String INSURANCE_SCHEME = "2d0fa959-6780-41f1-85b1-402045935068";
-		public static final String NON_PAYING_PATIENT_CATEGORY_UUID = "df0362f9-782e-4d92-8bb2-3112e9e9eb3c";
 	}
 
 	public static final class _VisitType {
@@ -367,11 +366,10 @@ public class CommonMetadata extends AbstractMetadataBundle {
 				FormDatatype.class, null, 0, 1, _VisitAttributeType.SOURCE_FORM));
 
 		install(visitAttributeType("Visit queue number", "The visit queue number assigned to a visit when they are added to the queue", FreeTextDatatype.class, null, 0, 1, _VisitAttributeType.VISIT_QUEUE_NUMBER));
-		install(visitAttributeType("Patient Type", "To indicate whether the patient is paying for a service", ConceptDatatype.class, null, 0, 1, _VisitAttributeType.PATIENT_TYPE_UUID));
-		install(visitAttributeType("Payment Method", "The payment method used by the patient to settle payment", ConceptDatatype.class, null, 0, 1, _VisitAttributeType.PAYMENT_METHOD_UUID));
+		install(visitAttributeType("Patient Type", "To indicate whether the patient is paying for a service", FreeTextDatatype.class, null, 0, 1, _VisitAttributeType.PATIENT_TYPE_UUID));
+		install(visitAttributeType("Payment Method", "The payment method used by the patient to settle payment", FreeTextDatatype.class, null, 0, 1, _VisitAttributeType.PAYMENT_METHOD_UUID));
 		install(visitAttributeType("Policy Number", "The insurance policy number or member number", FreeTextDatatype.class, null, 0, 1, _VisitAttributeType.POLICY_NUMBER));
 		install(visitAttributeType("Insurance scheme", "The insurance scheme the patient is using to settle payment for services e.g. NHIF, Old mutual.", FreeTextDatatype.class, null, 0, 1, _VisitAttributeType.INSURANCE_SCHEME));
-		install(visitAttributeType("Non-Paying patient category", "If a patient isn't paying for service, The catergory the fall in.", ConceptDatatype.class, null, 0, 1, _VisitAttributeType.NON_PAYING_PATIENT_CATEGORY_UUID));
 		
 		install(visitType("Outpatient", "Visit where the patient is not admitted to the hospital", _VisitType.OUTPATIENT));
 		install(visitType("Inpatient", "Visit where the patient is admitted to the hospital", _VisitType.INPATIENT));
